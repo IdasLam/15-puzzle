@@ -14,7 +14,7 @@ const GridContainer = styled.div`
     margin-top: 50px;
 `
 
-function Grid({ grid }: GridProps) {
+function Puzzle({ grid }: GridProps) {
   return (
     <GridContainer>
       {grid && grid.map((row) => { return <Row key={row.toString()} row={row} /> })}
@@ -22,4 +22,4 @@ function Grid({ grid }: GridProps) {
   )
 }
 
-export default Grid
+export default Puzzle
