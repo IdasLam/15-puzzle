@@ -7,8 +7,12 @@
         "project": "./tsconfig.json"
     },
     "rules": {
-        "semi": ["error", "never"],
+        "semi": ["off"],
         "@typescript-eslint/semi": "off",
-        "no-unexpected-multiline": "error"
+        "no-unexpected-multiline": "error",
+        "@typescript-eslint/lines-between-class-members": "off",
+        "class-methods-use-this": "error",
+        "arrow-body-style": ["error", "always"],
+        "@typescript-eslint/no-unused-vars": "warn"
     }
 }
