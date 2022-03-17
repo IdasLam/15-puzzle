@@ -3,6 +3,7 @@ import './App.css'
 import Puzzle from './components/puzzle'
 import { generateGrid } from './helper/puzzle'
 import 'normalize.css'
+import LastTileContext from './contexts/lastTile'
 
 function App() {
   const [moves] = useState(0)
@@ -19,7 +20,9 @@ function App() {
         {' '}
         {moves}
       </p>
-      <Puzzle grid={grid} lastTile={lastTile} />
+      <LastTileContext.Provider value={lastTile}>
+        <Puzzle grid={grid} />
+      </LastTileContext.Provider>
     </div>
   )
 }

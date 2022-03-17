@@ -1,5 +1,6 @@
 import styled from '@emotion/styled';
-import React from 'react';
+import React, { useContext } from 'react';
+import LastTileContext from '../contexts/lastTile';
 import { OnHandleTileClickType } from '../types/onHandleTileClick';
 
 const TileContainer = styled.div`
@@ -15,9 +16,15 @@ type TileProps = {
 }
 
 function Tile({ tile, onHandleTileClick }: TileProps) {
+  const lastTile = useContext(LastTileContext)
+
+  console.log(lastTile)
+
+  const tileName = tile === lastTile ? null : tile
+
   return (
     <TileContainer>
-      <p>{tile}</p>
+      <p>{tileName}</p>
     </TileContainer>
   )
 }
