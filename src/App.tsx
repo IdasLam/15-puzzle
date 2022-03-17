@@ -1,26 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react'
+import './App.css'
+import Grid from './components/grid'
+import { generateGrid } from './helper/puzzle'
+import 'normalize.css'
 
 function App() {
+  const [moves] = useState(0)
+  // const [reShuffle, setReShuffle] = useState(false)
+  const [{ columns, rows }] = useState({ columns: 4, rows: 4 })
+  const [grid] = useState(generateGrid({ rows, columns }))
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>
+        moves
+        {' '}
+        {moves}
+      </p>
+      <Grid grid={grid} />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
