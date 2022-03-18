@@ -1,4 +1,4 @@
-type ParamsGrid = {
+export type GridCount = {
   rows: number,
   columns: number
 }
@@ -12,7 +12,13 @@ export type GridIndexes = {
   row: number
 }
 
-export const shuffleTiles = ({ rows, columns }: ParamsGrid) => {
+type ValidTiles = GridIndexes[]
+type IsTileMovable = {
+  tile: GridIndexes,
+  emptyTile: GridIndexes
+}
+
+export const shuffleTiles = ({ rows, columns }: GridCount) => {
   const totalTiles = rows * columns
   const tiles: number[] = []
 
@@ -33,7 +39,7 @@ export const shuffleTiles = ({ rows, columns }: ParamsGrid) => {
   return tiles
 }
 
-export const generateGrid = ({ rows, columns }: ParamsGrid): GridType => {
+export const generateGrid = ({ rows, columns }: GridCount): GridType => {
   const grid = []
   const tiles = shuffleTiles({ rows, columns })
 
@@ -48,7 +54,7 @@ export const generateGrid = ({ rows, columns }: ParamsGrid): GridType => {
   return grid
 }
 
-export const findIndex = ({ grid, tile }: { grid: GridType, tile: number }): GridIndexes | void => {
+export const findIndex = ({ grid, tile }: { grid: GridType, tile: number }): GridIndexes => {
   let foundColIndex = -1
   let foundRowIndex = -1
 
@@ -68,9 +74,24 @@ export const findIndex = ({ grid, tile }: { grid: GridType, tile: number }): Gri
   return { row: foundRowIndex, column: foundColIndex }
 }
 
+export const isTileMovable = ({ tile, emptyTile }: IsTileMovable) => {
+  const validTiles: ValidTiles = [
+    { row: emptyTile.row - 1, column: emptyTile.column },
+    { row: emptyTile.row + 1, column: emptyTile.column },
+    { row: emptyTile.row, column: emptyTile.column - 1 },
+    { row: emptyTile.row, column: emptyTile.column + 1 },
+  ]
+
+  const tileFound = validTiles.find((validTile) => {
+    return JSON.stringify(validTile) === JSON.stringify(tile)
+  })
+
+  return !!tileFound
+}
+
 export const moveTile = ({ grid, tile, lastTile } : MoveTile) => {
   const indexOfTile = findIndex({ grid, tile })
   const indexOfEmptyTile = findIndex({ grid, tile: lastTile })
 
-  console.log({ indexOfTile, indexOfEmptyTile })
+  const isMovable = isTileMovable({ tile: indexOfTile, emptyTile: indexOfEmptyTile })
 }
