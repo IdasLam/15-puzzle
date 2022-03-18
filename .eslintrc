@@ -13,6 +13,8 @@
         "@typescript-eslint/lines-between-class-members": "off",
         "class-methods-use-this": "error",
         "arrow-body-style": ["error", "always"],
-        "@typescript-eslint/no-unused-vars": "warn"
+        "@typescript-eslint/no-unused-vars": "warn",
+        "jsx-a11y/click-events-have-key-events": "off",
+        "jsx-a11y/no-noninteractive-element-interactions": "off"
     }
 }
