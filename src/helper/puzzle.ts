@@ -7,6 +7,7 @@ type MoveTile = { grid: GridType, tile: number, lastTile: number, name: number }
 
 export type RowType = number[]
 export type GridType = RowType[]
+export type GeneratedGridType = { grid: RowType[], answer: number[] }
 export type GridIndexes = {
   column: number,
   row: number
@@ -17,8 +18,12 @@ type IsTileMovable = {
   tile: GridIndexes,
   emptyTile: GridIndexes
 }
+type ShuffleTiles = {
+  tiles: number[],
+  answer: number[]
+}
 
-export const shuffleTiles = ({ rows, columns }: GridCount) => {
+export const shuffleTiles = ({ rows, columns }: GridCount): ShuffleTiles => {
   const totalTiles = rows * columns
   const tiles: number[] = []
 
@@ -26,6 +31,8 @@ export const shuffleTiles = ({ rows, columns }: GridCount) => {
   for (let tile = 1; tile <= totalTiles; tile += 1) {
     tiles.push(tile)
   }
+
+  const answer = [...tiles]
 
   //   Shuffles tiles with Fisher-Yates algorith
   for (let tile = tiles.length - 1; tile > 0; tile -= 1) {
@@ -36,12 +43,12 @@ export const shuffleTiles = ({ rows, columns }: GridCount) => {
     tiles[j] = temp;
   }
 
-  return tiles
+  return { tiles, answer }
 }
 
-export const generateGrid = ({ rows, columns }: GridCount): GridType => {
+export const generateGrid = ({ rows, columns }: GridCount): GeneratedGridType => {
   const grid = []
-  const tiles = shuffleTiles({ rows, columns })
+  const { tiles, answer } = shuffleTiles({ rows, columns })
 
   //   Generate grid out of shuffled tiles
   for (let row = 1; row <= rows; row += 1) {
@@ -51,7 +58,7 @@ export const generateGrid = ({ rows, columns }: GridCount): GridType => {
     grid.push(tiles.slice(startTileIndex, endTileIndex))
   }
 
-  return grid
+  return { grid, answer }
 }
 
 export const findIndex = ({ grid, tile }: { grid: GridType, tile: number }): GridIndexes => {
