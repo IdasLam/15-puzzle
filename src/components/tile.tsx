@@ -9,6 +9,7 @@ const TileContainer = styled.div`
   }
   text-align: center;
   cursor: pointer;
+  user-select: none;
 `
 
 type TileProps = {
@@ -23,7 +24,7 @@ function Tile({ tile, onHandleTileClick }: TileProps) {
 
   return (
     <TileContainer>
-      <p onClick={() => { return onHandleTileClick(tile) }}>{tileName}</p>
+      <p onClick={() => { return onHandleTileClick({ tile, name: tile }) }}>{tileName}</p>
     </TileContainer>
   )
 }
