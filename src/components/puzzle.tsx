@@ -39,7 +39,7 @@ function Puzzle({
   return (
     <GridContainer>
       {
-        grid && grid.map((row) => {
+        grid.length > 0 && grid.map((row) => {
           return <Row key={row.toString()} row={row} onHandleTileClick={onHandleTileClick} />
         })
       }
