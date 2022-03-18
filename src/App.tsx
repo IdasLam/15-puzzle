@@ -6,11 +6,15 @@ import 'normalize.css'
 import LastTileContext from './contexts/lastTile'
 
 function App() {
-  const [moves] = useState(0)
+  const [moves, setMoves] = useState(0)
   // const [reShuffle, setReShuffle] = useState(false)
   const [{ columns, rows }] = useState({ columns: 4, rows: 4 })
   const [grid] = useState(generateGrid({ rows, columns }))
   const [lastTile] = useState(columns * rows)
+
+  const addMove = () => {
+    setMoves(moves + 1)
+  }
 
   // options for col and rows
   return (
@@ -21,7 +25,7 @@ function App() {
         {moves}
       </p>
       <LastTileContext.Provider value={lastTile}>
-        <Puzzle grid={grid} />
+        <Puzzle grid={grid} addMove={addMove} />
       </LastTileContext.Provider>
     </div>
   )

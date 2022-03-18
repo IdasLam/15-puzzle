@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from '@emotion/styled'
 import { RowType } from '../helper/puzzle'
 import Row from './row'
 import { OnHandleTileClickType } from '../types/onHandleTileClick'
+import LastTileContext from '../contexts/lastTile'
 
 type GridProps = {
-  grid: RowType[]
+  grid: RowType[],
+  addMove: () => void
 }
 
 const GridContainer = styled.div`
@@ -15,9 +17,10 @@ const GridContainer = styled.div`
     margin-top: 50px;
 `
 
-function Puzzle({ grid }: GridProps) {
+function Puzzle({ grid, addMove }: GridProps) {
+  const lastTile = useContext(LastTileContext)
+
   const onHandleTileClick: OnHandleTileClickType = (tile) => {
-    console.log('kocker')
   }
 
   return (
