@@ -3,7 +3,7 @@ export type GridCount = {
   columns: number
 }
 
-type MoveTile = { grid: GridType, tile: number, lastTile: number }
+type MoveTile = { grid: GridType, tile: number, lastTile: number, name: number }
 
 export type RowType = number[]
 export type GridType = RowType[]
@@ -82,6 +82,10 @@ export const isTileMovable = ({ tile, emptyTile }: IsTileMovable) => {
     { row: emptyTile.row, column: emptyTile.column + 1 },
   ]
 
+  if (JSON.stringify(tile) === JSON.stringify(emptyTile)) {
+    return false
+  }
+
   const tileFound = validTiles.find((validTile) => {
     return JSON.stringify(validTile) === JSON.stringify(tile)
   })
@@ -89,9 +93,32 @@ export const isTileMovable = ({ tile, emptyTile }: IsTileMovable) => {
   return !!tileFound
 }
 
-export const moveTile = ({ grid, tile, lastTile } : MoveTile) => {
+export const moveTile = ({
+  grid, tile, lastTile, name,
+} : MoveTile) => {
   const indexOfTile = findIndex({ grid, tile })
   const indexOfEmptyTile = findIndex({ grid, tile: lastTile })
 
   const isMovable = isTileMovable({ tile: indexOfTile, emptyTile: indexOfEmptyTile })
+
+  if (isMovable) {
+    // swap indexes of tiles
+    const newGrid = grid.map((row, rowIndex) => {
+      return row.map((rowTile, tileIndex) => {
+        if (rowIndex === indexOfEmptyTile.row && tileIndex === indexOfEmptyTile.column) {
+          return name
+        }
+
+        if (rowIndex === indexOfTile.row && tileIndex === indexOfTile.column) {
+          return lastTile
+        }
+
+        return rowTile
+      })
+    })
+
+    return newGrid
+  }
+
+  return null
 }
