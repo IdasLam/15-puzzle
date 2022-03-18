@@ -10,7 +10,7 @@ import LastTileContext from '../contexts/lastTile'
 type GridProps = {
   grid: RowType[],
   addMove: () => void,
-  setGrid: React.Dispatch<React.SetStateAction<GridType>>
+  setGrid: React.Dispatch<React.SetStateAction<GridType>>,
 }
 
 const GridContainer = styled.div`
@@ -20,7 +20,9 @@ const GridContainer = styled.div`
     margin-top: 50px;
 `
 
-function Puzzle({ grid, addMove, setGrid }: GridProps) {
+function Puzzle({
+  grid, addMove, setGrid,
+}: GridProps) {
   const lastTile = useContext(LastTileContext)
 
   const onHandleTileClick: OnHandleTileClickType = ({ tile, name }) => {
