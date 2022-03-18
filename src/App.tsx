@@ -9,7 +9,7 @@ function App() {
   const [moves, setMoves] = useState(0)
   // const [reShuffle, setReShuffle] = useState(false)
   const [{ columns, rows }] = useState({ columns: 4, rows: 4 })
-  const [grid] = useState(generateGrid({ rows, columns }))
+  const [grid, setGrid] = useState(generateGrid({ rows, columns }))
   const [lastTile] = useState(columns * rows)
 
   const addMove = () => {
@@ -25,7 +25,7 @@ function App() {
         {moves}
       </p>
       <LastTileContext.Provider value={lastTile}>
-        <Puzzle grid={grid} addMove={addMove} />
+        <Puzzle grid={grid} addMove={addMove} setGrid={setGrid} />
       </LastTileContext.Provider>
     </div>
   )
