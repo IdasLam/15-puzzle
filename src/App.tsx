@@ -5,6 +5,7 @@ import { generateGrid, GridType } from './helper/puzzle'
 import 'normalize.css'
 import Puzzle from './components/puzzle'
 import LastTileContext from './contexts/lastTile'
+import InputFields from './components/InputFields'
 
 const Finnish = styled.div`
 
@@ -12,21 +13,28 @@ const Finnish = styled.div`
 
 function App() {
   const [moves, setMoves] = useState(0)
-  const [{ columns, rows }] = useState({ columns: 4, rows: 4 })
+  const [{ columns, rows }, setColumnsRows] = useState({ columns: 2, rows: 2 })
   const [grid, setGrid] = useState<GridType>([])
-  const [lastTile] = useState(columns * rows)
+  const [lastTile, setLastTile] = useState(columns * rows)
   const [puzzleAnswer, setPuzzleAnswer] = useState<number[]>([])
   const [gameFinnished, setGameFinnished] = useState(false)
 
-  useEffect(() => {
+  const generateNewGrid = () => {
     const { grid: newGrid, answer } = generateGrid({ rows, columns })
 
+    setLastTile(rows * columns)
     setGrid(newGrid)
     setPuzzleAnswer(answer)
-  }, [])
+  }
 
   useEffect(() => {
-    if (grid.length > 1 && JSON.stringify(grid) === JSON.stringify(puzzleAnswer)) {
+    if (columns > 0 && rows > 0) {
+      generateNewGrid()
+    }
+  }, [columns, rows])
+
+  useEffect(() => {
+    if (grid.length > 1 && JSON.stringify(grid.flat()) === JSON.stringify(puzzleAnswer)) {
       setGameFinnished(true)
     }
   }, [grid])
@@ -44,6 +52,7 @@ function App() {
         {' '}
         { moves }
       </p>
+      <InputFields colRow={{ columns, rows }} setColumnsRows={setColumnsRows} />
       {gameFinnished && (
       <Finnish>
         <p>game finito</p>
