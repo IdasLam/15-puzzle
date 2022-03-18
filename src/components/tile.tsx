@@ -4,27 +4,26 @@ import LastTileContext from '../contexts/lastTile';
 import { OnHandleTileClickType } from '../types/onHandleTileClick';
 
 const TileContainer = styled.div`
+  p {
     min-width: 30px;
-    text-align: center;
-    cursor: pointer;
+  }
+  text-align: center;
+  cursor: pointer;
 `
 
 type TileProps = {
   tile: number,
   onHandleTileClick: OnHandleTileClickType
-
 }
 
 function Tile({ tile, onHandleTileClick }: TileProps) {
   const lastTile = useContext(LastTileContext)
 
-  console.log(lastTile)
-
-  const tileName = tile === lastTile ? null : tile
+  const tileName = tile === lastTile ? '-' : tile
 
   return (
     <TileContainer>
-      <p>{tileName}</p>
+      <p onClick={() => { return onHandleTileClick(tile) }}>{tileName}</p>
     </TileContainer>
   )
 }
