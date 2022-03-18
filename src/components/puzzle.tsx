@@ -24,7 +24,14 @@ function Puzzle({ grid, addMove, setGrid }: GridProps) {
   const lastTile = useContext(LastTileContext)
 
   const onHandleTileClick: OnHandleTileClickType = ({ tile, name }) => {
+    const newGrid = moveTile({
+      grid, tile, lastTile, name,
+    })
 
+    if (newGrid) {
+      addMove()
+      setGrid(newGrid)
+    }
   }
 
   return (
