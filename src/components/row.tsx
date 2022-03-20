@@ -1,7 +1,7 @@
 import styled from '@emotion/styled'
 import React from 'react'
-import { RowType } from '../helper/puzzle'
 import { OnHandleTileClickType } from '../types/onHandleTileClick'
+import { RowType } from '../types/puzzle'
 import Tile from './tile'
 
 const TileContainer = styled.div`

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { Button, ThemeProvider } from '@mui/material'
 import './App.css'
-import { generateGrid, GridType } from './helper/puzzle'
+import { generateGrid } from './helper/puzzle'
 import 'normalize.css'
 import Puzzle from './components/puzzle'
 import LastTileContext from './contexts/lastTile'
@@ -10,6 +10,7 @@ import InputFields from './components/InputFields'
 import Finnised from './components/Finnished'
 import theme from './theme'
 import Header from './components/Header'
+import { GridType } from './types/puzzle'
 
 const AppContainer = styled.div`
   display: flex;
@@ -33,6 +34,7 @@ const AppContainer = styled.div`
 function App() {
   const [moves, setMoves] = useState(0)
   const [{ columns, rows }, setColumnsRows] = useState({ columns: 4, rows: 4 })
+  // Puzzle grid
   const [grid, setGrid] = useState<GridType>([])
   const [lastTile, setLastTile] = useState(columns * rows)
   const [puzzleAnswer, setPuzzleAnswer] = useState<number[]>([])
@@ -50,12 +52,14 @@ function App() {
     setMoves(moves + 1)
   }
 
+  // Resets the moves and generates new grid
   const playAgain = () => {
     setGameFinnished(false)
     generateNewGrid()
     setMoves(0)
   }
 
+  // Genereate new grid when columns or rows gets inputed
   useEffect(() => {
     if (columns > 0 && rows > 0) {
       generateNewGrid()

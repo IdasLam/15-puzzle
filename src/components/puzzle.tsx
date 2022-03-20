@@ -1,11 +1,12 @@
 import React, { useContext } from 'react'
 import styled from '@emotion/styled'
 import {
-  GridType, moveTile, RowType,
+  moveTile,
 } from '../helper/puzzle'
 import Row from './row'
 import { OnHandleTileClickType } from '../types/onHandleTileClick'
 import LastTileContext from '../contexts/lastTile'
+import { GridType, RowType } from '../types/puzzle'
 
 type GridProps = {
   grid: RowType[],

@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { TextField } from '@mui/material'
-import { GridCount } from '../helper/puzzle'
+import { GridCount } from '../types/puzzle'
 
 const Input = styled.div`
     display: flex;

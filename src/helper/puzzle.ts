@@ -1,27 +1,13 @@
-export type GridCount = {
-  rows: number,
-  columns: number
-}
-
-type MoveTile = { grid: GridType, tile: number, lastTile: number, name: number }
-
-export type RowType = number[]
-export type GridType = RowType[]
-export type GeneratedGridType = { grid: RowType[], answer: number[] }
-export type GridIndexes = {
-  column: number,
-  row: number
-}
-
-type ValidTiles = GridIndexes[]
-type IsTileMovable = {
-  tile: GridIndexes,
-  emptyTile: GridIndexes
-}
-type ShuffleTiles = {
-  tiles: number[],
-  answer: number[]
-}
+import {
+  GeneratedGridType,
+  GridCount,
+  GridIndexes,
+  GridType,
+  IsTileMovable,
+  MoveTile,
+  ShuffleTiles,
+  ValidTiles,
+} from '../types/puzzle'
 
 export const shuffleTiles = ({ rows, columns }: GridCount): ShuffleTiles => {
   const totalTiles = rows * columns
