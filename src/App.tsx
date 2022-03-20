@@ -9,6 +9,7 @@ import LastTileContext from './contexts/lastTile'
 import InputFields from './components/InputFields'
 import Finnised from './components/Finnished'
 import theme from './theme'
+import Header from './components/Header'
 
 const AppContainer = styled.div`
   display: flex;
@@ -70,15 +71,9 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <AppContainer>
-        <h1>15 - Puzzle</h1>
-        <p>by Ida Lam</p>
-        <h2>
-          Current moves :
-          {' '}
-          { moves }
-        </h2>
+        <Header moves={moves} />
         <InputFields colRow={{ columns, rows }} setColumnsRows={setColumnsRows} />
-        <Button variant="outlined" onClick={() => { return generateNewGrid() }}>Shuffle</Button>
+        <Button variant="contained" onClick={() => { return generateNewGrid() }}>Shuffle</Button>
         {gameFinnished
       && <Finnised moves={moves} playAgain={playAgain} />}
         <LastTileContext.Provider value={lastTile}>
