@@ -17,6 +17,7 @@ type TileProps = {
   onHandleTileClick: OnHandleTileClickType
 }
 
+// One tile in the puzzle
 function Tile({ tile, onHandleTileClick }: TileProps) {
   const lastTile = useContext(LastTileContext)
 

@@ -14,6 +14,7 @@ type RowProps = {
   onHandleTileClick: OnHandleTileClickType
 }
 
+// One row of the puzzle
 function Row({ row, onHandleTileClick }: RowProps) {
   return (
     <TileContainer>

@@ -23,6 +23,7 @@ type Finnished = {
   playAgain: () => void
 }
 
+// Text that gets displayed when the game is finnished
 function Finnised({ moves, playAgain }: Finnished) {
   return (
     <>

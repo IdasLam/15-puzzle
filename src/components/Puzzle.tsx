@@ -20,7 +20,7 @@ const GridContainer = styled.div`
     padding: 5%;
     border-radius: 30px;
 `
-
+// Puzzle game which generates each row
 function Puzzle({
   grid, addMove, setGrid,
 }: GridProps) {

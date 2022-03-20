@@ -9,6 +9,9 @@ import {
   ValidTiles,
 } from '../types/puzzle'
 
+/**
+ * Creates and shuffles all of the tiles
+ */
 export const shuffleTiles = ({ rows, columns }: GridCount): ShuffleTiles => {
   const totalTiles = rows * columns
   const tiles: number[] = []
@@ -22,16 +25,19 @@ export const shuffleTiles = ({ rows, columns }: GridCount): ShuffleTiles => {
 
   //   Shuffles tiles with Fisher-Yates algorith
   for (let tile = tiles.length - 1; tile > 0; tile -= 1) {
-    const j = Math.floor(Math.random() * (tile + 1));
+    const index = Math.floor(Math.random() * (tile + 1));
     const temp = tiles[tile];
 
-    tiles[tile] = tiles[j];
-    tiles[j] = temp;
+    tiles[tile] = tiles[index];
+    tiles[index] = temp;
   }
 
   return { tiles, answer }
 }
 
+/**
+ * Generates a randomised grid out of tiles
+ */
 export const generateGrid = ({ rows, columns }: GridCount): GeneratedGridType => {
   const grid = []
   const { tiles, answer } = shuffleTiles({ rows, columns })
@@ -47,6 +53,9 @@ export const generateGrid = ({ rows, columns }: GridCount): GeneratedGridType =>
   return { grid, answer }
 }
 
+/**
+ * Find index of a tile
+ */
 export const findIndex = ({ grid, tile }: { grid: GridType, tile: number }): GridIndexes => {
   let foundColIndex = -1
   let foundRowIndex = -1
@@ -67,6 +76,9 @@ export const findIndex = ({ grid, tile }: { grid: GridType, tile: number }): Gri
   return { row: foundRowIndex, column: foundColIndex }
 }
 
+/**
+ * Checks if the clicked tile is movable or not
+ */
 export const isTileMovable = ({ tile, emptyTile }: IsTileMovable) => {
   const validTiles: ValidTiles = [
     { row: emptyTile.row - 1, column: emptyTile.column },
@@ -86,6 +98,9 @@ export const isTileMovable = ({ tile, emptyTile }: IsTileMovable) => {
   return !!tileFound
 }
 
+/**
+ * Moves the clicked tile
+ */
 export const moveTile = ({
   grid, tile, lastTile, name,
 } : MoveTile) => {

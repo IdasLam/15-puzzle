@@ -19,6 +19,7 @@ type InputFieldsProps = {
 
 }
 
+// Inputs for row and columns
 function InputFields({ colRow, setColumnsRows }: InputFieldsProps) {
   const { columns, rows } = colRow
 
