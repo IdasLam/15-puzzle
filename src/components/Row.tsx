@@ -2,7 +2,7 @@ import styled from '@emotion/styled'
 import React from 'react'
 import { OnHandleTileClickType } from '../types/onHandleTileClick'
 import { RowType } from '../types/puzzle'
-import Tile from './tile'
+import Tile from './Tile'
 
 const TileContainer = styled.div`
     display: flex;

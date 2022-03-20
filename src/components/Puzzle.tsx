@@ -3,7 +3,7 @@ import styled from '@emotion/styled'
 import {
   moveTile,
 } from '../helper/puzzle'
-import Row from './row'
+import Row from './Row'
 import { OnHandleTileClickType } from '../types/onHandleTileClick'
 import LastTileContext from '../contexts/lastTile'
 import { GridType, RowType } from '../types/puzzle'
