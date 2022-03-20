@@ -7,6 +7,7 @@ const Input = styled.div`
     display: flex;
     gap: 1vw;
     place-content: center;
+    max-width: 300px;
 `
 
 type InputFieldsProps = {

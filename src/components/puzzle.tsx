@@ -14,10 +14,10 @@ type GridProps = {
 }
 
 const GridContainer = styled.div`
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    margin-top: 50px;
+    margin-top: 5vh;
+    background-color: #b08968;
+    padding: 5%;
+    border-radius: 30px;
 `
 
 function Puzzle({

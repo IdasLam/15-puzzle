@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
-import { Button } from '@mui/material'
+import { Button, ThemeProvider } from '@mui/material'
 import './App.css'
 import { generateGrid, GridType } from './helper/puzzle'
 import 'normalize.css'
@@ -8,6 +8,7 @@ import Puzzle from './components/puzzle'
 import LastTileContext from './contexts/lastTile'
 import InputFields from './components/InputFields'
 import Finnised from './components/Finnished'
+import theme from './theme'
 
 const AppContainer = styled.div`
   display: flex;
@@ -17,9 +18,14 @@ const AppContainer = styled.div`
   margin: 0 auto;
   text-align: center;
   align-items: center;
+  margin-top: 5vh;
 
-  button {
-    width: 10vw;
+  h1 {
+    margin-bottom: 0;
+  }
+
+  > p {
+    margin: unset;
   }
 `
 
@@ -62,21 +68,24 @@ function App() {
   }, [grid])
 
   return (
-    <AppContainer>
-      <h1>15 - Puzzle</h1>
-      <p>
-        Current moves :
-        {' '}
-        { moves }
-      </p>
-      <InputFields colRow={{ columns, rows }} setColumnsRows={setColumnsRows} />
-      <Button variant="outlined" onClick={() => { return generateNewGrid() }}>Shuffle</Button>
-      {gameFinnished
+    <ThemeProvider theme={theme}>
+      <AppContainer>
+        <h1>15 - Puzzle</h1>
+        <p>by Ida Lam</p>
+        <h2>
+          Current moves :
+          {' '}
+          { moves }
+        </h2>
+        <InputFields colRow={{ columns, rows }} setColumnsRows={setColumnsRows} />
+        <Button variant="outlined" onClick={() => { return generateNewGrid() }}>Shuffle</Button>
+        {gameFinnished
       && <Finnised moves={moves} playAgain={playAgain} />}
-      <LastTileContext.Provider value={lastTile}>
-        <Puzzle grid={grid} addMove={addMove} setGrid={setGrid} />
-      </LastTileContext.Provider>
-    </AppContainer>
+        <LastTileContext.Provider value={lastTile}>
+          <Puzzle grid={grid} addMove={addMove} setGrid={setGrid} />
+        </LastTileContext.Provider>
+      </AppContainer>
+    </ThemeProvider>
   )
 }
 
