@@ -7,10 +7,10 @@ import 'normalize.css'
 import Puzzle from './components/Puzzle'
 import LastTileContext from './contexts/lastTile'
 import InputFields from './components/InputFields'
-import Finnised from './components/Finnished'
 import theme from './theme'
 import Header from './components/Header'
 import { GridType } from './types/puzzle'
+import Finished from './components/Finished'
 
 const AppContainer = styled.div`
   display: flex;
@@ -20,7 +20,6 @@ const AppContainer = styled.div`
   margin: 0 auto;
   text-align: center;
   align-items: center;
-  margin-top: 5vh;
 
   h1 {
     margin-bottom: 0;
@@ -38,7 +37,7 @@ function App() {
   const [grid, setGrid] = useState<GridType>([])
   const [lastTile, setLastTile] = useState(columns * rows)
   const [puzzleAnswer, setPuzzleAnswer] = useState<number[]>([])
-  const [gameFinnished, setGameFinnished] = useState(false)
+  const [gameFinished, setGameFinished] = useState(false)
 
   const generateNewGrid = () => {
     const { grid: newGrid, answer } = generateGrid({ rows, columns })
@@ -54,12 +53,12 @@ function App() {
 
   // Resets the moves and generates new grid
   const playAgain = () => {
-    setGameFinnished(false)
+    setGameFinished(false)
     generateNewGrid()
     setMoves(0)
   }
 
-  // Genereate new grid when columns or rows gets inputed
+  // Generate new grid when columns or rows gets inputted
   useEffect(() => {
     if (columns > 0 && rows > 0) {
       generateNewGrid()
@@ -68,7 +67,7 @@ function App() {
 
   useEffect(() => {
     if (grid.length > 1 && JSON.stringify(grid.flat()) === JSON.stringify(puzzleAnswer)) {
-      setGameFinnished(true)
+      setGameFinished(true)
     }
   }, [grid])
 
@@ -78,8 +77,8 @@ function App() {
         <Header moves={moves} />
         <InputFields colRow={{ columns, rows }} setColumnsRows={setColumnsRows} />
         <Button variant="contained" onClick={() => { return generateNewGrid() }}>Shuffle</Button>
-        {gameFinnished
-      && <Finnised moves={moves} playAgain={playAgain} />}
+        {gameFinished
+      && <Finished moves={moves} playAgain={playAgain} />}
         <LastTileContext.Provider value={lastTile}>
           <Puzzle grid={grid} addMove={addMove} setGrid={setGrid} />
         </LastTileContext.Provider>

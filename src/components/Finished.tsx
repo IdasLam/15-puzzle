@@ -2,7 +2,7 @@ import styled from '@emotion/styled';
 import { Button } from '@mui/material';
 import React from 'react';
 
-const FinnishedContainer = styled.div`
+const FinishedContainer = styled.div`
     position: absolute;
     width: 100vw;
     height: 100vh;
@@ -16,21 +16,26 @@ const TextContainer = styled.div`
     left: 50%;
     top: 20%;
     transform: translateX(-50%);
+    z-index: 10;
+    background-color: #d5bdaf;
+    display: flex;
+    gap: 5vh;
+    flex-flow: column;
 `
 
-type Finnished = {
+type FinishedProps = {
   moves: number,
   playAgain: () => void
 }
 
-// Text that gets displayed when the game is finnished
-function Finnised({ moves, playAgain }: Finnished) {
+// Text that gets displayed when the game is Finished
+function Finished({ moves, playAgain }: FinishedProps) {
   return (
     <>
-      <FinnishedContainer onClick={() => { return playAgain() }} />
+      <FinishedContainer onClick={() => { return playAgain() }} />
       <TextContainer>
         <h1>
-          You finnshed the game in
+          You finished the game in
           {' '}
           {moves}
           {' '}
@@ -42,4 +47,4 @@ function Finnised({ moves, playAgain }: Finnished) {
   )
 }
 
-export default Finnised
+export default Finished
