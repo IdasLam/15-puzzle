@@ -21,9 +21,10 @@ export const shuffleTiles = ({ rows, columns }: GridCount): ShuffleTiles => {
     tiles.push(tile)
   }
 
+  // Make a shallow copy
   const answer = [...tiles]
 
-  //   Shuffles tiles with Fisher-Yates algorith
+  //   Shuffles tiles with Fisher-Yates algorithm
   for (let tile = tiles.length - 1; tile > 0; tile -= 1) {
     const index = Math.floor(Math.random() * (tile + 1));
     const temp = tiles[tile];
@@ -36,7 +37,7 @@ export const shuffleTiles = ({ rows, columns }: GridCount): ShuffleTiles => {
 }
 
 /**
- * Generates a randomised grid out of tiles
+ * Generates a randomized grid out of tiles
  */
 export const generateGrid = ({ rows, columns }: GridCount): GeneratedGridType => {
   const grid = []
@@ -53,21 +54,35 @@ export const generateGrid = ({ rows, columns }: GridCount): GeneratedGridType =>
   return { grid, answer }
 }
 
-/**
- * Find index of a tile
- */
+/** Find index of a tile */
 export const findIndex = ({ grid, tile }: { grid: GridType, tile: number }): GridIndexes => {
   let foundColIndex = -1
   let foundRowIndex = -1
 
-  grid.forEach((row, rowIndex) => {
-    row.forEach((gridTile, tileIndex) => {
+  // Find row and tile in the grid
+  for (let rowIndex = 0; rowIndex < grid.length; rowIndex += 1) {
+    const row = grid[rowIndex]
+
+    for (let tileIndex = 0; tileIndex < row.length; tileIndex += 1) {
+      const gridTile = row[tileIndex]
+
       if (tile === gridTile) {
         foundColIndex = tileIndex
         foundRowIndex = rowIndex
+        break
       }
-    })
-  });
+    }
+  }
+
+  // Same as above however more readable but less inefficient
+  // grid.forEach((row, rowIndex) => {
+  //   row.forEach((gridTile, tileIndex) => {
+  //     if (tile === gridTile) {
+  //       foundColIndex = tileIndex
+  //       foundRowIndex = rowIndex
+  //     }
+  //   })
+  // });
 
   if (foundColIndex === -1 && foundRowIndex === -1) {
     throw new Error('Index was not found')
