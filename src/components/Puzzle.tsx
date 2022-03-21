@@ -28,7 +28,10 @@ function Puzzle({
 
   const onHandleTileClick: OnHandleTileClickType = ({ tile, name }) => {
     const newGrid = moveTile({
-      grid, tile, lastTile, name,
+      grid,
+      tile,
+      lastTile,
+      name,
     })
 
     if (newGrid) {

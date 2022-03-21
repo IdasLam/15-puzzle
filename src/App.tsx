@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import styled from '@emotion/styled'
 import { Button, ThemeProvider } from '@mui/material'
 import './App.css'
-import { generateGrid } from './helper/puzzle'
+import { generateGrid, isSame } from './helper/puzzle'
 import 'normalize.css'
 import Puzzle from './components/Puzzle'
 import LastTileContext from './contexts/lastTile'
@@ -58,7 +58,7 @@ function App() {
     setMoves(0)
   }
 
-  // Generate new grid when columns or rows gets inputted
+  // Generate new grid when columns or rows change
   useEffect(() => {
     if (columns > 0 && rows > 0) {
       generateNewGrid()
@@ -66,7 +66,9 @@ function App() {
   }, [columns, rows])
 
   useEffect(() => {
-    if (grid.length > 1 && JSON.stringify(grid.flat()) === JSON.stringify(puzzleAnswer)) {
+    const isAnswer = isSame(grid.flat(), puzzleAnswer)
+
+    if (grid.length > 1 && isAnswer) {
       setGameFinished(true)
     }
   }, [grid])
@@ -77,8 +79,7 @@ function App() {
         <Header moves={moves} />
         <InputFields colRow={{ columns, rows }} setColumnsRows={setColumnsRows} />
         <Button variant="contained" onClick={() => { return generateNewGrid() }}>Shuffle</Button>
-        {gameFinished
-      && <Finished moves={moves} playAgain={playAgain} />}
+        {gameFinished && <Finished moves={moves} playAgain={playAgain} />}
         <LastTileContext.Provider value={lastTile}>
           <Puzzle grid={grid} addMove={addMove} setGrid={setGrid} />
         </LastTileContext.Provider>

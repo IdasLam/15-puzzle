@@ -22,3 +22,5 @@ export type ShuffleTiles = {
   tiles: number[],
   answer: number[]
 }
+
+export type IsSame = { [name: string]: any } | any[]

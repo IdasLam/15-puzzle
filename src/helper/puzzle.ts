@@ -3,11 +3,16 @@ import {
   GridCount,
   GridIndexes,
   GridType,
+  IsSame,
   IsTileMovable,
   MoveTile,
   ShuffleTiles,
   ValidTiles,
 } from '../types/puzzle'
+
+export const isSame = (firstParam: IsSame, secondParam: IsSame) => {
+  return JSON.stringify(firstParam) === JSON.stringify(secondParam)
+}
 
 /**
  * Creates and shuffles all of the tiles
@@ -74,7 +79,7 @@ export const findIndex = ({ grid, tile }: { grid: GridType, tile: number }): Gri
     }
   }
 
-  // Same as above however more readable but less inefficient
+  // Same as above however more readable but less efficient
   // grid.forEach((row, rowIndex) => {
   //   row.forEach((gridTile, tileIndex) => {
   //     if (tile === gridTile) {
@@ -102,12 +107,12 @@ export const isTileMovable = ({ tile, emptyTile }: IsTileMovable) => {
     { row: emptyTile.row, column: emptyTile.column + 1 },
   ]
 
-  if (JSON.stringify(tile) === JSON.stringify(emptyTile)) {
+  if (isSame(tile, emptyTile)) {
     return false
   }
 
   const tileFound = validTiles.find((validTile) => {
-    return JSON.stringify(validTile) === JSON.stringify(tile)
+    return isSame(validTile, tile)
   })
 
   return !!tileFound
