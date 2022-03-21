@@ -1,8 +1,6 @@
 # 15 Puzzle
 A frontend application of the 15 puzzle which contains 15 tiles numbered 1-15 and 1 empty tile. 
 
-This project was developed under a span of a few days.
-
 ## Requirements
 The original assignment of the puzzle had the following requirements:
 - Responsive
@@ -22,7 +20,7 @@ The original assignment of the puzzle had the following requirements:
 - When completing the puzzle there should be a prompt on the screen.
 
 ### Modifications
-Most of the requirements where followed however some changes where made. The modifications where made in regard with no set deadline.
+Most of the requirements where followed however some changes where made. The modifications where made in regard with no set deadline. This project was developed under a span of a about few days.
 
 Instead of doing a simplified version of the 15 puzzle I decided to do the "normal" one to challenge myself. This was something that I decided to implement because it would make the game closer to the original but also as an additional feature to the project.
 
@@ -43,7 +41,9 @@ I strongly believe that the project could improve on the following parts:
 
 *More efficient code:* The code could me more efficient when the scaling of the columns and rows becomes larger. In the current state the puzzle will start to lag when generating the grid. An easy solution to this is to put an limit to how many rows and columns there can be. However more efficient code could also be looked into.
 
-The project has been a fun and interesting to develop. I am most proud of the grid structure. The grid is made up by a nestled array: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]. With the last tile, 16, tile corresponding to the empty tile. With this grid indexes could easily be identified.
+The project has been a fun and interesting to develop. I am most proud of the grid structure. The grid is made up by a nestled array: [[1, 2, 3, 4], [5, 6, 7, 8], [9, 10, 11, 12], [13, 14, 15, 16]]. With the last tile, 16, tile corresponding to the empty tile. With this grid indexes could easily be identified. I tried to keep each file small and manageable by writing DRY and Dumb functions.
+
+Overall it has been a fun project. Nothing like the projects that I have done previously.  
 
 ## Main Technologies
 - [MUI](https://mui.com/)
